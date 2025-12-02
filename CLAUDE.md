@@ -1,73 +1,89 @@
-# Mosher Labs Basic Repo Template - Project Memory
+# Discr Documentation - Project Memory
 
 This file contains persistent context for Claude Code sessions on this project.
 It will be automatically loaded at the start of every session.
 
 ## Project Overview
 
-This is a template repository for creating new Mosher Labs projects. It provides
-a standardized starting point with pre-configured tooling and workflows.
+This repository contains all documentation for the Discr project, including
+architecture decisions, API documentation, user guides, and development workflows.
 
 **Key Details:**
 
-- **Purpose:** Template for new repositories
+- **Purpose:** Centralized documentation repository
+- **Format:** Markdown with proper linting
 - **CI/CD:** GitHub Actions with release workflow
-- **Linting:** Pre-commit hooks for code quality
-- **Pattern:** Fork or use as template, then customize
+- **Linting:** Pre-commit hooks for markdown and YAML
 
 ## Repository Structure
 
 ```text
-basic-repo-template/
+docs/
 ├── .github/workflows/     # CI/CD workflows
-│   └── release.yml        # Semantic versioning & releases
-├── .pre-commit-config.yaml
+├── architecture/          # Architecture decision records (ADRs)
+├── api/                   # API documentation
+├── guides/                # Development and user guides
 ├── README.md
 └── CLAUDE.md
 ```
 
-## Using This Template
+## Documentation Standards
 
-### Creating a New Repo
+### Markdown Guidelines
 
-1. **Use as template:** Click "Use this template" on GitHub
-1. **Clone locally:** `git clone <your-new-repo>`
-1. **Update README.md:** Replace template content with project description
-1. **Customize workflows:** Adjust `.github/workflows/` as needed
-1. **Install pre-commit:** `pre-commit install`
-1. **Create CLAUDE.md:** Document project-specific context
+- Follow markdownlint rules
+- Use proper heading hierarchy (H1 for title, then H2, H3, etc.)
+- Maximum line length: 120 characters
+- Include table of contents for long documents
+- Use fenced code blocks with language specified
+- Use descriptive link text (no "click here")
 
-### Pre-configured Features
+### Architecture Decision Records (ADRs)
 
-- **Release workflow:** Automatic semantic versioning from Conventional Commits
-- **Pre-commit hooks:** YAML, Markdown, and commit message linting
-- **GitHub Actions:** Ready to use CI/CD
-- **Documentation:** README template with badges
+Format for ADRs:
+
+```markdown
+# ADR-XXX: Title
+
+## Status
+
+[Proposed | Accepted | Deprecated | Superseded]
+
+## Context
+
+What is the issue we're seeing that is motivating this decision?
+
+## Decision
+
+What is the change we're proposing and/or doing?
+
+## Consequences
+
+What becomes easier or more difficult to do because of this change?
+```
+
+### API Documentation
+
+- Document all endpoints with examples
+- Include request/response formats
+- Document error responses
+- Keep examples up to date with code
 
 ## Git Workflow
 
-1. **Create feature branch:** `git checkout -b feature/description`
-1. **Make changes** to code or documentation
+1. **Create feature branch:** `git checkout -b docs/description`
+1. **Make changes** to documentation
 1. **ALWAYS run pre-commit BEFORE committing:** `pre-commit run --all-files`
    - Fix ALL errors (especially markdown and YAML formatting)
    - Do NOT commit with `--no-verify` unless absolutely necessary
-1. **Commit with conventional format:** `git commit -m "type: description"`
-1. **Push and create PR:** `gh pr create --title "feat: description"`
-1. **Test changes:** If your changes reference shared workflows that were also updated,
-   temporarily change the reference from `@main` to `@your-branch` to test, verify
-   the PR passes, then change back to `@main` before merging
+1. **Commit with conventional format:** `git commit -m "docs: description"`
+1. **Push and create PR:** `gh pr create --title "docs: description"`
 1. **Merge to main:** Automatic release created based on commits
 
 **Commit Format:** Conventional Commits (enforced by pre-commit hook)
 
-- `feat:` - New feature (triggers minor version bump)
-- `fix:` - Bug fix (triggers patch version bump)
 - `docs:` - Documentation changes (no version bump)
-- `chore:` - Maintenance (no version bump)
-- `refactor:` - Code refactoring (no version bump)
-- `test:` - Temporary test changes (like branch references)
-
-**Breaking changes:** Add `!` after type (e.g., `feat!:`) or include `BREAKING CHANGE:` in commit body for major version bump
+- `chore:` - Maintenance like updating pre-commit hooks
 
 ## Pre-commit Hooks
 
@@ -90,8 +106,7 @@ pre-commit autoupdate           # Update hook versions
 
 ### Code Quality Standards
 
-**CRITICAL:** All code must adhere to linter rules from the start. Do NOT write
-code that needs fixing after running pre-commit hooks.
+**CRITICAL:** All documentation must adhere to markdown linter rules from the start.
 
 **Markdown (markdownlint):**
 
@@ -99,7 +114,6 @@ Configuration: `.markdownlint.yaml` (allows 2-space indent, 120 char lines)
 
 - Nested lists under unordered items: Use 2-space indentation
 - Nested lists under ordered items: Use 2-space indentation
-- Inline format for simple nested items: `**Item:** Detail 1, Detail 2`
 - Line length: 120 characters max (code/tables excluded)
 - Bare URLs: Allowed in reference sections
 - Bold for emphasis: Allowed in lists
@@ -109,28 +123,27 @@ Configuration: `.markdownlint.yaml` (allows 2-space indent, 120 char lines)
 - Maximum line length: 80 characters
 - Use 2-space indentation
 - No trailing whitespace
-- Proper quoting for strings containing special characters
 
-### When Working on This Repo
+### Best Practices
 
-1. **Write linter-compliant code from the start** - Don't fix after the fact
-1. **Run pre-commit hooks** BEFORE committing (fix all errors!)
-1. **Follow Conventional Commits** - Enables automatic versioning
-1. **Update CLAUDE.md** - Document important project context
-1. **Test shared workflow changes** - Use branch references before merging
+1. **Keep docs updated** - Documentation should match current code
+1. **Use examples** - Show, don't just tell
+1. **Link related docs** - Help users navigate between related topics
+1. **Version important changes** - Note when APIs or features change
+1. **Review for clarity** - Have someone else review before merging
 
 ## References
 
 - @README.md - Repository overview
-- Shared Workflows: <https://github.com/Mosher-Labs/.github>
-- Conventional Commits: <https://www.conventionalcommits.org/>
+- Markdown Guide: <https://www.markdownguide.org/>
+- ADR Template: <https://github.com/joelparkerhenderson/architecture-decision-record>
 
 ---
 
-**Last Updated:** 2025-11-18
+**Last Updated:** 2025-11-30
 
 This file should be updated whenever:
 
-- Project patterns change
+- Documentation standards change
 - Important context is discovered
 - Tooling is added or modified
